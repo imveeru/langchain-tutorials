@@ -62,7 +62,6 @@ if cuisine and res_type and location:
                 data=pdf.output(dest='S').encode('latin1'),
                 file_name=res["restaurant_name"]+" - Menu.pdf",
             )
-    
         
         st.divider()
         st.caption("The above given list and prices are AI Generated. Please do a cost analysis and customer analysis before considering the above response.")
