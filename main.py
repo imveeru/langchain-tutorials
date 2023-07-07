@@ -1,5 +1,7 @@
 import streamlit as st
 import urllib.parse
+from fpdf import FPDF
+import base64
 
 st.set_page_config(
     page_title="CulinaryCrafter",
@@ -18,7 +20,7 @@ def get_response(cuisine):
 
 if cuisine and res_type and location:
         res=get_response(cuisine)
-    
+        st.divider()
         st.header(res["restaurant_name"])
         cuisine=urllib.parse.quote(res["cuisine"])
         type=urllib.parse.quote(res["type"])
@@ -34,4 +36,8 @@ if cuisine and res_type and location:
         for item in menu_items:
             st.write("-",item.strip())
         
-    
+        st.divider()
+        st.caption("The above given list and prices are AI Generated. Please do a cost analysis and customer analysis before considering the above response.")
+else:
+    st.divider()
+    st.write("Choose the options to generate name and menu for the restaurant!")
