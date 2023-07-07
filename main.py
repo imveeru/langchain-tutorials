@@ -42,30 +42,11 @@ if cuisine and res_type and location:
             i+=1
 
         export_as_pdf = st.button("Export Menu")
-        if export_as_pdf:
-            
-            pdf = FPDF()  # pdf object
-            pdf = FPDF(orientation="P", unit="mm", format="A4")
-            pdf.add_page()
-            pdf.set_font("Arial", "B", 18)
-            pdf.set_xy(10.0, 20)
-            pdf.cell(w=75.0, h=5.0, align="L", txt="Menu of "+str(res["restaurant_name"]))
-            pdf.set_font("Arial", size=12)
-            pdf.set_xy(10.0, 30)
-            pdf.cell(w=75.0, h=5.0, align="L", txt=f"A "+res["cuisine"]+f" - {type} restaurant running in {place}.")
-            pdf.set_xy(10.0, 35)
-            pdf.write(h=7.0,txt=menu_text)
-            
-
-            st.download_button(
-                "Download Menu",
-                data=pdf.output(dest='S').encode('latin1'),
-                file_name=res["restaurant_name"]+" - Menu.pdf",
-            )
         
         st.divider()
         st.caption("The above given list and prices are AI Generated. Please do a cost analysis and customer analysis before considering the above response.")
 else:
     st.divider()
     st.write("Choose the options to generate name and menu for the restaurant!")
+    
     

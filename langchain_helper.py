@@ -23,18 +23,23 @@ name_chain=LLMChain(llm=llm,prompt=name_template,output_key="restaurant_name")
 
 menu_template=PromptTemplate(
     input_variables=['restaurant_name','von','menu'],
-    template="Give me a comma separated values of menu items (minimum 20, maximum 50) for the {von} restaurant named {restaurant_name} which serves {menu}"
+    template='''Give me a comma separated values of menu items (minimum 20, maximum 50)
+    for the {von} restaurant named {restaurant_name} which serves {menu} cuisine.
+    Format the output like ITEM1, ITEM2, ITEM3,...
+    '''
 )
 menu_chain=LLMChain(llm=llm,prompt=menu_template,output_key="menu_items")
 
 price_template=PromptTemplate(
     input_variables=['menu_items','location'],
     template='''
-    Give me a comma separated price list for the below mentioned menu items.
+    Give me the price list for the below mentioned menu items.
     
     {menu_items}
     
-    The restaurant is located in {location}. Assign the price accordingly. Assume the currency according to the give location. Format the output as a comma separated values.
+    The restaurant is located in {location}. Assign the price accordingly.
+    Assume the currency according to the give location.
+    Format the output like ITEM - PRICE.
     '''
 )
 price_chain=LLMChain(llm=llm,prompt=price_template,output_key="price")
