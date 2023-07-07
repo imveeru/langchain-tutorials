@@ -1,5 +1,7 @@
 import streamlit as st
 import urllib.parse
+from fpdf import FPDF
+import base64
 
 st.set_page_config(
     page_title="CulinaryCrafter",
@@ -37,6 +39,21 @@ if cuisine and res_type and location:
             st.write("-",item.strip())
             
         export_as_pdf = st.button("Export Menu")
+        if export_as_pdf:
+            
+            pdf = FPDF()  # pdf object
+            pdf = FPDF(orientation="P", unit="mm", format="A4")
+            pdf.add_page()
+
+            pdf.set_font("Arial", "B", 18)
+            pdf.set_xy(10.0, 20)
+            pdf.cell(w=75.0, h=5.0, align="L", txt="Menu of "+str(res["cuisine"]))
+
+            st.download_button(
+                "Download Report",
+                data=pdf.output(dest='S').encode('latin-1'),
+                file_name="Output.pdf",
+            )
     
         
         st.divider()
