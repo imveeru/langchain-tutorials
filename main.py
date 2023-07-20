@@ -3,6 +3,11 @@ import urllib.parse
 from fpdf import FPDF
 from langchain_helper import generate_name_and_menu
 
+from dotenv import dotenv_values
+config = dotenv_values(".env")
+import os
+os.environ["OPENAI_API_KEY"]=config["openai_api_key"]
+
 st.set_page_config(
     page_title="CulinaryCrafter",
     page_icon="🥣",
