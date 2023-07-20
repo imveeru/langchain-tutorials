@@ -1,7 +1,7 @@
-from dotenv import dotenv_values
-config = dotenv_values(".env")
-import os
-os.environ["OPENAI_API_KEY"]=config["openai_api_key"]
+# from dotenv import dotenv_values
+# config = dotenv_values(".env")
+# import os
+# os.environ["OPENAI_API_KEY"]=config["openai_api_key"]
 
 from langchain.llms import OpenAI
 
